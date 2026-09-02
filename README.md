@@ -30,7 +30,7 @@ python src/generate_plots.py
 ## Results
 Performance on the 2024 test set, after hyperparameter tuning:
 
-| Model         | MAE (SEK) | RMSE (SEK) | R2   |
+| Model         | MAE (SEK) | RMSE (SEK) |  R²  |
 |---------------|-----------|------------|------|
 | **XGBoost**   | 738,989   | 1,217,465  | 0.90 |
 | Random Forest | 743,366   | 1,235,145  | 0.90 |
