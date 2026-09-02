@@ -1,5 +1,4 @@
 # Real Estate Price Prediction
-
 A project comparing three supervised regression models for predicting
 real estate prices in Stockholm's inner city, using real transaction
 data from the Booli API (2012-2024).
@@ -7,26 +6,31 @@ data from the Booli API (2012-2024).
 **Authors:** Alexander Maleki & Andrea Woldemar
 
 ## Approach
-
 - Data: historical apartment sales retrieved from the Booli API, restricted
-  to Stockholm's inner city (Södermalm, Östermalm, Vasastaden, Kungsholmen)
+  to Stockholm's inner city - 21 districts across three administrative areas
+  (Kungsholmen, Norra innerstaden, Södermalm)
 - Time-aware split: trained on 2012-2023, tested on 2024, to simulate
   real-world forecasting rather than random shuffling
 - Models: Random Forest, XGBoost, and k-NN, each tuned via `OptunaSearchCV`
   with 5-fold time-series cross-validation
 
 ## Code
-
-- `src/preprocess.py` - cleans the raw data, splits it by time, encodes and
-  scales features
+- `src/preprocess.py` - cleans the raw data, splits it by time, encodes and scales features
 - `src/train_models.py` - trains baseline models, then tunes each with Optuna
 - `src/generate_plots.py` - regenerates the result figures from the trained models
 
-## Results
+## Setup
+```bash
+pip install -r requirements.txt
+python src/preprocess.py
+python src/train_models.py
+python src/generate_plots.py
+```
 
+## Results
 Performance on the 2024 test set, after hyperparameter tuning:
 
-| Model         | MAE (SEK) | RMSE (SEK) | R²   |
+| Model         | MAE (SEK) | RMSE (SEK) | R2   |
 |---------------|-----------|------------|------|
 | **XGBoost**   | 738,989   | 1,217,465  | 0.90 |
 | Random Forest | 743,366   | 1,235,145  | 0.90 |
@@ -36,8 +40,10 @@ XGBoost gave the best overall fit and improved the most from tuning.
 
 ![Predicted vs Actual Price](assets/xgboost_predicted.png)
 
-## Notes
+## Report
+Full thesis: [PDF](./report/bachelorthesis.pdf) · [DiVA record](https://kth.diva-portal.org/smash/record.jsf?pid=diva2%3A1985507&dswid=-4237)
 
+## Notes
 The raw dataset isn't included here, since it originates from the Booli API
 and isn't ours to redistribute - `src/preprocess.py` documents the full retrieval
 and cleaning pipeline instead.
